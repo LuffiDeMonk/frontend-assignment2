@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import { BiCart } from "react-icons/bi";
 import { addToCart } from "../../features/CartSlice";
@@ -13,9 +14,20 @@ const ProductDetail = ({ singleProductData }) => {
       title: singleProductData?.title,
       image: singleProductData?.image,
       quantity: quantity,
-      price: singleProductData?.price,
+      price: singleProductData?.price * quantity,
+      unitPrice: singleProductData?.price,
     };
     dispatch(addToCart(cart));
+    toast.success("Item Added to Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   const handleIncrement = () => {
     return setQuantity((prevQty) => prevQty + 1);
@@ -29,6 +41,18 @@ const ProductDetail = ({ singleProductData }) => {
   };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="basis-[35%] shrink-0">
         <img
           src={singleProductData?.image}

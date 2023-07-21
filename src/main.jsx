@@ -15,6 +15,7 @@ import App from "./App.jsx";
 //swiper css modules
 import "swiper/css";
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 //initializing the instance of query client
 const client = new QueryClient();

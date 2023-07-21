@@ -10,11 +10,8 @@ const modalSlice = createSlice({
   initialState,
 
   reducers: {
-    togglePortal: (state, { payload }) => {
-      if (payload) {
-        state.isModalOpen = payload;
-      }
-      state.isModalOpen = !state.isModalOpen;
+    togglePortal: (state) => {
+      return { ...state, isModalOpen: !state.isModalOpen };
     },
     addModalProduct: (state, action) => {
       state.modalProduct = action.payload;

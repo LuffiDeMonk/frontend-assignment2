@@ -6,13 +6,14 @@ import CategoryCarousel from "../components/CategoryCarousel/CategoryCarousel";
 import Portal from "../components/Portal/Portal";
 import { useSelector } from "react-redux";
 import { useFilterHook } from "../hooks/useFilterHook";
+import Loading from "../components/Loading/Loading";
 
 //view component which shows the data
 const View = ({ data }) => {
   return (
     <Container className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {data?.map((item) => (
-        <ProductCard data={item} />
+        <ProductCard data={item} key={item.id} />
       ))}
     </Container>
   );
@@ -30,6 +31,7 @@ const Home = () => {
       <CategoryCarousel />
       <View data={filteredData} />
       {showPortal && <Portal />}
+      {isLoading && <Loading />}
     </>
   );
 };

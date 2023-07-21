@@ -25,12 +25,15 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center justify-center gap-2 h-full">
           <Search />
-          <div className="relative h-full flex items-center justify-center">
+          <Link
+            to="/cart"
+            className="relative h-full flex items-center justify-center"
+          >
             <AiOutlineShoppingCart size={30} />
             <div className="w-6 h-6 bg-orange-500 text-white text-[10px] absolute top-1.5 -right-2 flex items-center justify-center rounded-full">
               {cartQuantity}
             </div>
-          </div>
+          </Link>
         </div>
       </Container>
     </div>

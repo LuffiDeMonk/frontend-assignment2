@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 import { addModalProduct, togglePortal } from "../../features/ModalSlice";
 import { addToCart } from "../../features/CartSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const ProductCard = ({ data }) => {
   const dispatch = useDispatch();
@@ -20,22 +21,39 @@ const ProductCard = ({ data }) => {
       image: data?.image,
       quantity: 1,
       price: data?.price,
+      unitPrice: data?.price,
     };
     dispatch(addToCart(cart));
+    toast.success("Item Added to Cart", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   const handlePortal = (data) => {
-    dispatch(togglePortal(false));
+    dispatch(togglePortal());
     dispatch(addModalProduct(data));
   };
   return (
-    <div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      layout
-      className="w-full h-[20rem] max-h-[22rem] rounded-sm border border-stone-300 p-1"
-    >
+    <div className="w-full h-[20rem] max-h-[22rem] rounded-sm border border-stone-300 p-1">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="w-full h-[14rem] group transition-all overflow-hidden relative border border-gray-300">
         <img
           src={data?.image}
@@ -66,11 +84,11 @@ const ProductCard = ({ data }) => {
       <div className="flex flex-col gap-0.5 w-full">
         <Link
           to={`/product/${data?.id}`}
-          className="cursor-pointer text-lg w-full overflow-hidden font-bold whitespace-nowrap text-ellipsis"
+          className="cursor-pointer text-md w-full overflow-hidden font-semibold whitespace-nowrap text-ellipsis"
         >
           {data?.title}
         </Link>
-        <p className="text-md text-gray-500 font-semibold capitalize">
+        <p className="text-sm text-gray-500 font-light capitalize">
           {data?.category}
         </p>
         <div className="flex gap-1 items-center">
