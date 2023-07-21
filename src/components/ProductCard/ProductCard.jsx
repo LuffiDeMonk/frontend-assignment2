@@ -1,15 +1,41 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
 //icons import
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineEye,
 } from "react-icons/ai";
+import { addModalProduct, togglePortal } from "../../features/ModalSlice";
+import { addToCart } from "../../features/CartSlice";
 
 const ProductCard = ({ data }) => {
+  const dispatch = useDispatch();
+  const handleCart = () => {
+    let cart = {
+      id: data?.id,
+      title: data?.title,
+      image: data?.image,
+      quantity: 1,
+      price: data?.price,
+    };
+    dispatch(addToCart(cart));
+  };
+
+  const handlePortal = (data) => {
+    dispatch(togglePortal(false));
+    dispatch(addModalProduct(data));
+  };
   return (
-    <div className="w-full h-[20rem] max-h-[22rem] rounded-sm border border-stone-300 p-1">
+    <div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      layout
+      className="w-full h-[20rem] max-h-[22rem] rounded-sm border border-stone-300 p-1"
+    >
       <div className="w-full h-[14rem] group transition-all overflow-hidden relative border border-gray-300">
         <img
           src={data?.image}
@@ -23,23 +49,32 @@ const ProductCard = ({ data }) => {
           <div className="w-7 h-7 rounded-full bg-gray-500 flex items-center justify-center text-md text-white cursor-pointer">
             <AiOutlineHeart />
           </div>
-          <div className="w-7 h-7 rounded-full bg-gray-500 flex items-center justify-center text-md text-white cursor-pointer">
+          <div
+            onClick={handleCart}
+            className="w-7 h-7 rounded-full bg-gray-500 flex items-center justify-center text-md text-white cursor-pointer"
+          >
             <AiOutlineShoppingCart />
           </div>
-          <div className="w-7 h-7 rounded-full bg-gray-500 flex items-center justify-center text-md text-white cursor-pointer">
+          <div
+            onClick={() => handlePortal(data)}
+            className="w-7 h-7 rounded-full bg-gray-500 flex items-center justify-center text-md text-white cursor-pointer"
+          >
             <AiOutlineEye />
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-0.5 w-full">
-        <h1 className="text-lg w-full overflow-hidden font-bold whitespace-nowrap text-ellipsis">
+        <Link
+          to={`/product/${data?.id}`}
+          className="cursor-pointer text-lg w-full overflow-hidden font-bold whitespace-nowrap text-ellipsis"
+        >
           {data?.title}
-        </h1>
+        </Link>
         <p className="text-md text-gray-500 font-semibold capitalize">
           {data?.category}
         </p>
         <div className="flex gap-1 items-center">
-          <h2 className="text-xl text-red-400 font-bold">
+          <h2 className="text-xl text-orange-400 font-bold">
             ${data?.price.toFixed(2)}
           </h2>
         </div>

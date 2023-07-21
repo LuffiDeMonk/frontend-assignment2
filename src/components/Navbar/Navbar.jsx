@@ -8,10 +8,12 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 //import container component
 import Container from "../Container/Container";
 import Search from "../Search/Search";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const cartQuantity = useSelector((state) => state.cart.totalItems);
   return (
-    <div className="w-full h-16 bg-white fixed top-0 left-0 border-b border-stone-300 z-10">
+    <div className="w-full h-16 bg-white fixed top-0 left-0 border-b border-stone-300 z-10 px-3 md:px-0">
       <Container className="h-full flex items-center justify-between">
         {/* logo */}
         <Link
@@ -24,9 +26,9 @@ const Navbar = () => {
         <div className="flex items-center justify-center gap-2 h-full">
           <Search />
           <div className="relative h-full flex items-center justify-center">
-            <AiOutlineShoppingCart size={25} />
-            <div className="w-4 h-4 bg-orange-500 text-white text-xs absolute top-3 -right-1 flex items-center justify-center rounded-full">
-              1
+            <AiOutlineShoppingCart size={30} />
+            <div className="w-6 h-6 bg-orange-500 text-white text-[10px] absolute top-1.5 -right-2 flex items-center justify-center rounded-full">
+              {cartQuantity}
             </div>
           </div>
         </div>
