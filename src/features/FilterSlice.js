@@ -19,8 +19,11 @@ const FilterSlice = createSlice({
         state.category = payload;
       }
     },
+    resetCategory: (state) => {
+      return { ...state, category: "" };
+    },
   },
 });
 
-export const { setSearch, selectFilter } = FilterSlice.actions;
+export const { setSearch, selectFilter, resetCategory } = FilterSlice.actions;
 export default FilterSlice.reducer;

@@ -1,12 +1,15 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Container from "../components/Container/Container";
 
 import { getAllProductsData } from "../utils/getProducts";
 import ProductCard from "../components/ProductCard/ProductCard";
 import CategoryCarousel from "../components/CategoryCarousel/CategoryCarousel";
 import Portal from "../components/Portal/Portal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFilterHook } from "../hooks/useFilterHook";
 import Loading from "../components/Loading/Loading";
+import { resetCategory } from "../features/FilterSlice";
 
 //no data found component
 const Error = () => {
@@ -34,12 +37,17 @@ const View = ({ data }) => {
 };
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
   const searchTerm = useSelector((state) => state.filter.search);
   const { data, isLoading } = getAllProductsData(searchTerm);
   const showPortal = useSelector((state) => state.modal.isModalOpen);
   const category = useSelector((state) => state.filter.category);
   const { filteredData } = useFilterHook(category, data);
 
+  useEffect(() => {
+    dispatch(resetCategory());
+  }, [location.pathName]);
   return (
     <>
       <CategoryCarousel />
