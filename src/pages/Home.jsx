@@ -1,15 +1,16 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import Container from "../components/Container/Container";
 
+import { resetCategory } from "../features/FilterSlice";
 import { getAllProductsData } from "../utils/getProducts";
+import { useFilterHook } from "../hooks/useFilterHook";
+
+import Container from "../components/Container/Container";
 import ProductCard from "../components/ProductCard/ProductCard";
 import CategoryCarousel from "../components/CategoryCarousel/CategoryCarousel";
 import Portal from "../components/Portal/Portal";
-import { useDispatch, useSelector } from "react-redux";
-import { useFilterHook } from "../hooks/useFilterHook";
 import Loading from "../components/Loading/Loading";
-import { resetCategory } from "../features/FilterSlice";
 
 //no data found component
 const Error = () => {
