@@ -1,7 +1,5 @@
-import React from "react";
-
 //import for routers
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 //components import
 import Navbar from "./components/Navbar/Navbar";
@@ -14,7 +12,7 @@ const App = () => {
     <div className="font-Poppins">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

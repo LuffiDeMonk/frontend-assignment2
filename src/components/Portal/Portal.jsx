@@ -8,7 +8,6 @@ import ProductDetail from "../ProductDetail/ProductDetail";
 const Portal = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.modal.modalProduct);
-  const bodyStyles = document.body.style;
 
   const handleModalClose = () => {
     dispatch(togglePortal());

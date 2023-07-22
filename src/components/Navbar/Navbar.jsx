@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* logo */}
         <Link
           to="/"
-          className="h-full text-xl font-bold flex items-center justify-center"
+          className="h-full text-sm md:text-xl font-bold flex items-center justify-center"
         >
           <BiSolidShoppingBags size={30} />
           Online<span className="text-orange-500">Store</span>

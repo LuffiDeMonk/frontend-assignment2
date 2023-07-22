@@ -8,14 +8,28 @@ import { useSelector } from "react-redux";
 import { useFilterHook } from "../hooks/useFilterHook";
 import Loading from "../components/Loading/Loading";
 
+//no data found component
+const Error = () => {
+  return (
+    <Container>
+      <div className="flex items-center justify-center bg-gray-100 text-gray-400 rounded-sm w-full h-[30rem] text-xl mt-5">
+        No Result found
+      </div>
+    </Container>
+  );
+};
+
 //view component which shows the data
 const View = ({ data }) => {
   return (
-    <Container className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {data?.map((item) => (
-        <ProductCard data={item} key={item.id} />
-      ))}
-    </Container>
+    <>
+      {data?.length === 0 && <Error />}
+      <Container className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {data?.map((item) => (
+          <ProductCard data={item} key={item.id} />
+        ))}
+      </Container>
+    </>
   );
 };
 

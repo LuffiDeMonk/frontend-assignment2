@@ -1,4 +1,5 @@
 import React from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import Container from "../components/Container/Container";
 import CartCard from "../components/CartCard/CartCard";
@@ -10,6 +11,20 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cart);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
+
+  const handleClearCart = () => {
+    toast.success("Cart Cleared Successfully", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    dispatch(clearCart());
+  };
   return (
     <Container className="mt-20 space-y-3">
       <h2 className="text-2xl font-semibold">My cart</h2>
@@ -46,7 +61,7 @@ const Cart = () => {
             </div>
             <div className="space-y-2">
               <button
-                onClick={() => dispatch(clearCart())}
+                onClick={handleClearCart}
                 className="border border-orange-400 text-orange-400 hover:text-white font-semibold p-2 hover:bg-orange-400 w-full rounded-md transition-colors duration-200"
               >
                 Clear Cart
@@ -70,6 +85,18 @@ const Cart = () => {
           </Link>
         </div>
       )}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Container>
   );
 };
