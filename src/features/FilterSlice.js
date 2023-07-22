@@ -20,7 +20,7 @@ const FilterSlice = createSlice({
       }
     },
     resetCategory: (state) => {
-      return { ...state, category: "" };
+      return { ...state, category: "", search: "" };
     },
   },
 });

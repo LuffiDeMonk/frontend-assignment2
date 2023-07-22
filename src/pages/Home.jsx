@@ -48,7 +48,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(resetCategory());
-  }, [location.pathName]);
+  }, [location.pathname]);
   return (
     <>
       <CategoryCarousel />
