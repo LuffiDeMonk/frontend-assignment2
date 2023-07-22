@@ -18,7 +18,7 @@ Click [here](https://papaya-smakager-4b33ad.netlify.app/) to view the live demo 
 
 1. Clone the repo into your local machine using the command
    ```
-   git clone <repo url>
+   git clone https://github.com/LuffiDeMonk/frontend-assignment2.git
    ```
 2. Once the repo is cloned to your machine, run the following command to install the dependencies used in this project
    ```
